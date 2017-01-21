@@ -13,9 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf import settings
+from django.conf.urls import url, include
+from django.conf.urls.static import static
 from django.contrib import admin
+from django.views.generic import RedirectView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^soccer/', include('soccer.urls')),
+    url(r'^$', RedirectView.as_view(url='/soccer/', permanent=True)),
 ]
+
+
+"""
+Django does not serve static files like CSS, JavaScript, and images by default, but it can be useful for the
+development web server to do so while you're creating your site.
+Uncomment the following line to do so.
+"""
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
