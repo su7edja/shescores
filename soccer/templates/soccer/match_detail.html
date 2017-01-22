@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>{{ match.home_team }} VS {{ match.away_team }}</h1>
+
+    <p>Venue: {{ match.venue }}</p>
+    <p>Kickoff: {{ match.kickoff }}</p>
+    <p><a href="" target="_blank">Watch</a></p>
+    <table>
+      <tr>
+          <td></td>
+          <td><a href="{% url 'team-detail' match.home_team.pk %}">{"><strong>{{ match.home_team }}</strong></a></td>
+          <td><a href="{% url 'team-detail' match.away_team.pk %}">{"><strong>{{ match.away_team }}</strong></a></td>
+      </tr>
+      <tr>
+          <td>Full Time</td>
+          <td>{{ match.home_score }}</td>
+          <td>{{ match.away_score }}</td>
+      </tr>
+      <tr>
+          <td>Penalty</td>
+          <td>{{ match.home_penalty_score }}</td>
+          <td>{{ match.away_penalty_score }}</td>
+      </tr>
+    </table>
+
+{% endblock %}

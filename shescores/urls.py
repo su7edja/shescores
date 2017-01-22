@@ -25,6 +25,10 @@ urlpatterns = [
     url(r'^$', RedirectView.as_view(url='/soccer/', permanent=True)),
 ]
 
+# Add Django site authentication urls (for login, logout, password management)
+urlpatterns += [
+    url('^accounts/', include('django.contrib.auth.urls')),
+]
 
 """
 Django does not serve static files like CSS, JavaScript, and images by default, but it can be useful for the

@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Competition List</h1>
+
+    <ul>
+      {% for comp in competition_list %}
+      <li>
+        <a href="{{ comp.website }}" target="_blank">{{ comp.year }} {{ comp.name }}</a> | 
+        <a href="{% url 'matches-by-competition' comp.pk %}">  Matches </a>
+      </li>
+      {% endfor %}
+    </ul>
+
+{% endblock %}

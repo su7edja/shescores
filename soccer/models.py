@@ -93,8 +93,9 @@ class Competition(models.Model):
     name = models.CharField(max_length=255)
     year = models.IntegerField(choices=YEAR_CHOICES)
     league = models.ForeignKey(League, models.SET_NULL, blank=True, null=True)
-    participants = models.ManyToManyField(Team, related_name="competition_participated")
-    champion = models.ForeignKey(Team, models.PROTECT, blank=True, null=True, related_name="competition_won")
+    website = models.URLField(blank=True, null=True)
+    participants = models.ManyToManyField(Team, related_name="competitions_participated")
+    champion = models.ForeignKey(Team, models.PROTECT, blank=True, null=True, related_name="competitions_won")
 
     def __str__(self):
         return '{} - {}'.format(self.year, self.name)
@@ -103,7 +104,7 @@ class Competition(models.Model):
 class Match(models.Model):
     competition = models.ForeignKey(Competition, models.CASCADE)
     venue = models.CharField(max_length=255)
-    kickoff = models.DateTimeField(help_text='UTC Time')
+    kickoff = models.DateTimeField(help_text='Local Time')
     home_team = models.ForeignKey(Team, models.PROTECT, related_name="home_matches")
     away_team = models.ForeignKey(Team, models.PROTECT, related_name="away_matches")
     home_score = models.IntegerField(blank=True, null=True)
@@ -111,6 +112,10 @@ class Match(models.Model):
     home_penalty_score = models.IntegerField(blank=True, null=True)
     away_penalty_score = models.IntegerField(blank=True, null=True)
     winner = models.CharField(max_length=4, choices=(('home', 'home'), ('away', 'away')), blank=True, null=True)
+    watch_channel_1 = models.CharField(max_length=20, blank=True, null=True)
+    watch_url_1 = models.URLField(blank=True, null=True)
+    watch_channel_2 = models.CharField(max_length=20, blank=True, null=True)
+    watch_url_2 = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return '[{}]: {} {} - {} {}'.format(self.competition, self.home_team, self.home_score, self.away_score,

@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Match List</h1>
+
+    <ul>
+      {% for match in match_list %}
+      <li>
+        {{ match.kickoff }} <a href="{{ match.get_absolute_url }}">{{ match.home_team.alias }} vs {{ match.away_team.alias }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+
+{% endblock %}

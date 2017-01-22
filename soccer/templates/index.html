@@ -5,6 +5,51 @@
 
   <p>Welcome to <em>SheScores</em>, the home of soccer.</p>
 
+    <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+<h2>Today's Matches (Pacific Time):</h2>
+<table>
+    <tr>
+        <td>Time</td>
+        <td>Home</td>
+        <td>Away</td>
+        <td>Watch</td>
+    </tr>
+    {% for match in todays_matches %}
+    <tr>
+        <td>{{ match.kickoff }}</td>
+        <td>{{ match.home_team }}</td>
+        <td>{{ match.away_team }}</td>
+        <td>{{ match.watch }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+    No matches today
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Upcoming Matches (Pacific Time):</h2>
+<table>
+    <tr>
+        <td>Time</td>
+        <td>Home</td>
+        <td>Away</td>
+        <td>Watch</td>
+    </tr>
+    {% for match in upcoming_matches %}
+    <tr>
+        <td>{{ match.kickoff }}</td>
+        <td>{{ match.home_team.alias }}</td>
+        <td>{{ match.away_team.alias }}</td>
+        <td>{{ match.watch }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+    No upcoming matches
+    </tr>
+    {% endfor %}
+</table>
+
 <h2>Dynamic content</h2>
 
   <p>We have the following counts:</p>
