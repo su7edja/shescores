@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>SheScores Home</h1>
+
+  <p>Welcome to <em>SheScores</em>, the home of soccer.</p>
+
+<h2>Dynamic content</h2>
+
+  <p>We have the following counts:</p>
+  <ul>
+    <li><strong>Competitions:</strong> {{ num_competitions }}</li>
+    <li><strong>Matches:</strong> {{ num_matches }}</li>
+    <li><strong>Teams:</strong> {{ num_teams }}</li>
+    <li><strong>Players:</strong> {{ num_players }}</li>
+  </ul>
+
+{% endblock %}
