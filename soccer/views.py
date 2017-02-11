@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import generic
 
-from .models import Competition, Match, Team, Player
+from .models import Competition, Match, Team, Player, TeamPlayerRelationship
 
 
 def index(request):
@@ -35,7 +35,7 @@ class MatchListView(generic.ListView):
     paginate_by = 15
 
 
-class MatchDetailView(generic.ListView):
+class MatchDetailView(generic.DetailView):
     model = Match
 
 
@@ -46,3 +46,33 @@ class MatchesByCompetitionListView(LoginRequiredMixin, generic.ListView): # just
 
     def get_queryset(self):
         return Match.objects.filter(competition_id=self.request.resolver_match.kwargs['comp_id'])
+
+    def get_context_data(self, **kwargs):
+        context = super(MatchesByCompetitionListView, self).get_context_data(**kwargs)
+        context['comp_name'] = Competition.objects.get(pk=self.request.resolver_match.kwargs['comp_id']).__str__()
+        return context
+
+
+class TeamListView(generic.ListView):
+    model = Team
+    paginate_by = 15
+
+
+class TeamDetailView(generic.DetailView):
+    model = Team
+
+    def get_context_data(self, **kwargs):
+        context = super(TeamDetailView, self).get_context_data(**kwargs)
+        qs = TeamPlayerRelationship.objects.filter(team=context['object'], current=True)
+        players = Player.objects.filter(id__in=qs.values_list('player_id'))
+        context['players'] = players
+        return context
+
+
+class PlayerListView(generic.ListView):
+    model = Player
+    paginate_by = 15
+
+
+class PlayerDetailView(generic.DetailView):
+    model = Player

@@ -6,7 +6,7 @@
     <ul>
       {% for match in match_list %}
       <li>
-        {{ match.kickoff }} <a href="{{ match.get_absolute_url }}">{{ match.home_team.alias }} vs {{ match.away_team.alias }}</a>
+        {{ match.kickoff }} <a href="{% url 'match-detail' match.pk %}">  {{ match.home_team.alias }} vs {{ match.away_team.alias }}</a>
       </li>
       {% endfor %}
     </ul>

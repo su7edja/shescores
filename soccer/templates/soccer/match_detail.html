@@ -5,12 +5,13 @@
 
     <p>Venue: {{ match.venue }}</p>
     <p>Kickoff: {{ match.kickoff }}</p>
-    <p><a href="" target="_blank">Watch</a></p>
+    <p>{% if match.watch_url_1 %}<a href="{{ match.watch_url_1 }}" target="_blank">{{ match.watch_channel_1 }}</a>{% endif %}</p>
+    <p>{% if match.watch_url_2 %}<a href="{{ match.watch_url_2 }}" target="_blank">{{ match.watch_channel_2 }}</a>{% endif %}</p>
     <table>
       <tr>
           <td></td>
-          <td><a href="{% url 'team-detail' match.home_team.pk %}">{"><strong>{{ match.home_team }}</strong></a></td>
-          <td><a href="{% url 'team-detail' match.away_team.pk %}">{"><strong>{{ match.away_team }}</strong></a></td>
+          <td><a href="{% url 'team-detail' match.home_team.pk %}"><strong> {{ match.home_team }} </strong></a></td>
+          <td><a href="{% url 'team-detail' match.away_team.pk %}"><strong> {{ match.away_team }} </strong></a></td>
       </tr>
       <tr>
           <td>Full Time</td>

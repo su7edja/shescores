@@ -124,6 +124,7 @@ class Match(models.Model):
     class Meta:
         verbose_name_plural = "matches"
 
+
 class GoalScored(models.Model):
     match = models.ForeignKey(Match, models.CASCADE)
     player = models.ForeignKey(Player, models.PROTECT)

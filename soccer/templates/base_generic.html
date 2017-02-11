@@ -25,8 +25,8 @@
           <li><a href="{% url 'index' %}">Home</a></li>
           <li><a href="{% url 'competitions' %}">All Competitions</a></li>
           <li><a href="{% url 'matches' %}">All Matches</a></li>
-          <li><a href="">All Teams</a></li>
-          <li><a href="">All Players</a></li>
+          <li><a href="{% url 'teams' %}">All Teams</a></li>
+          <li><a href="{% url 'players' %}">All Players</a></li>
 
          {% if user.is_authenticated %}
            <li>User: {{ user.get_username }}</li>

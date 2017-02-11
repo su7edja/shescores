@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>{{ team.name }}</h1>
+
+    {% for player in players %}
+      <li>
+        {% if player.number %}{{ player.number }}{% else %}-{% endif %} {{ player.position }}<a href="{% url 'player-detail' player.pk %}">  {{ player.name }}</a>
+      </li>
+    {% endfor %}
+
+{% endblock %}
